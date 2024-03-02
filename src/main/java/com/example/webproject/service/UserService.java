@@ -1,10 +1,11 @@
 package com.example.webproject.service;
 
-import com.example.webproject.model.UserDetails;
-import org.springframework.stereotype.Service;
+import com.example.webproject.model.UserDtls;
 
 
 public interface UserService {
 
-    public UserDetails createUser(UserDetails user);
+    public UserDtls createUser(UserDtls user);
+
+    public boolean checkEmail(String email);
 }

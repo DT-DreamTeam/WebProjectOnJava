@@ -1,7 +1,8 @@
 package com.example.webproject.controller;
 
-import com.example.webproject.model.UserDetails;
+import com.example.webproject.model.UserDtls;
 import com.example.webproject.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/sigin")
     public String login(){
         return "login";
     }
@@ -30,10 +31,28 @@ public class HomeController {
     }
 
     @PostMapping("/createUser")
-    public String createuser(@ModelAttribute UserDetails user){
+    public String createuser(@ModelAttribute UserDtls user, HttpSession session){
+
+        boolean f=userService.checkEmail(user.getEmail());
+
+        if(f){
+            session.setAttribute("msg","email id exist");
+        }
+        else{
+            UserDtls userDtls=userService.createUser(user);
+            if(userDtls != null){
+                session.setAttribute("msg","Good registering");
+            }
+            else {
+                session.setAttribute("msg","oh my some error on server");
+            }
+        }
+
+
+
 
         //System.out.println(user);
-        UserDetails userDetails=userService.createUser(user);
-        return "register";
+
+        return "redirect:/register";
     }
 }

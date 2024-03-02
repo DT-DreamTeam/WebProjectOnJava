@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymLeaf.org" th:replace="base::Layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymLeaf.org" th:replace="~{base::Layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -12,11 +12,18 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-header text-center ">Login Page</div>
+
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Invalid username & Password</div>
+
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        Logout Sucessfully</div>
+
                     <div class="card-body">
-                        <form>
+                        <form action="/login" method="post">
 
                             <div class="mb-3">
-                                <label>email</label><input type="text" name="email" class="form-control">
+                                <label>email</label><input type="text" name="username" class="form-control">
                             </div>
 
                             <div class="mb-3">

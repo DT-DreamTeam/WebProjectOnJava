@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class UserDetails {
+public class UserDtls {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -23,5 +23,7 @@ public class UserDetails {
     private String qualification;
 
     private String password;
+
+    private String role;
 
 }
