@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -28,6 +31,4 @@ public class UserServiceImpl implements UserService {
     public boolean checkEmail(String email) {
         return userRepo.existsByEmail(email);
     }
-
-
 }

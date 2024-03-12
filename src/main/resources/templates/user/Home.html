@@ -1,15 +1,28 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .user-info {
+
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+
+        }
+    </style>
 </head>
 <body>
 <h1>After login page</h1>
-<a href="/logout">Logout</a>
-<h1>Name:[[${user.fullName}]]</h1>
-<h1>email:[[${user.email}]]</h1>
-<h1>Qulification: [[${user.qualification}]]</h1>
+<div class="user-info">
+    <a href="/logout">Logout</a>
+    <h1>Name:[[${user.fullName}]]</h1>
+    <h1>email:[[${user.email}]]</h1>
+    <h1>Qulification: [[${user.qualification}]]</h1>
+</div>
 
 </body>
 </html>

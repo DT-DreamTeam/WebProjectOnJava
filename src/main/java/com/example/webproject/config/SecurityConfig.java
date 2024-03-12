@@ -1,6 +1,7 @@
 package com.example.webproject.config;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,10 +13,14 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig  {
+
+    @Autowired
+    public AuthenticationSuccessHandler customSuccessHandler;
 
     @Bean
     public UserDetailsService getUserDetailsService(){
@@ -58,13 +63,14 @@ public class SecurityConfig  {
                         authorizeRequests
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/user/**").hasRole("USER")
+                                .requestMatchers("/trainer/**").access("hasRole('ROLE_TRAINER')")
                                 .requestMatchers("/**").permitAll())
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/signin")
                                 .loginProcessingUrl("/login")
                                 .failureUrl("/sigin")
-                                .defaultSuccessUrl("/user/"));
+                                .successHandler(customSuccessHandler));
         http.csrf(AbstractHttpConfigurer::disable);
 
 
